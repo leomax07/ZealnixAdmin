@@ -2,15 +2,16 @@ import "./AppointmentsScreen.scss";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import TabComponent from "../../Components/Tab/tab";
 import { APPOINTMENT_TAB_OPTIONS, BRANCH_ID } from "../../constants";
 import GridAndListToggleHeader from "../../Components/GridAndListToggleHeader/Index";
 import AddNewAppointments from "./AddNewAppointments";
 import { getAppointmentsCalendarData } from "./store/appointmentMiddleware";
-import { AppDispatch, RootState } from "../../redux/store";
+import { AppDispatch } from "../../redux/store";
 import ButtonComponent from "../../Components/Buttons/Index";
 import FilterDropdown from "../../Components/FilterDropdown/Index";
+import { departmentsData } from "./mock";
 
 export type TabOptions = {
 	label: string;
@@ -26,10 +27,10 @@ function AppointmentScreen() {
 	const [selectedDay, setSelectedDay] = useState("Today");
 	const dispatch = useDispatch<AppDispatch>();
 	const [date, setDate] = useState(new Date().toString());
-	const { departments } = useSelector<
-		RootState,
-		RootState["departmentsReducers"]
-	>((rootState) => rootState.departmentsReducers);
+	// const { departments } = useSelector<
+	// 	RootState,
+	// 	RootState["departmentsReducers"]
+	// >((rootState) => rootState.departmentsReducers);
 	const [selectedDepartmentId, setSelectedDepartmentId] = useState("");
 
 	const toggleAddNew = () => {
@@ -87,9 +88,9 @@ function AppointmentScreen() {
 					<div className="appointments__header__container__left">
 						<div>
 							<FilterDropdown
-								items={departments}
+								items={departmentsData}
 								optionLabel="name"
-								optionValue="id"
+								optionValue="name"
 								value={selectedDepartmentId}
 								handleChange={handleDepartmentSelection}
 								placeholder="Department"

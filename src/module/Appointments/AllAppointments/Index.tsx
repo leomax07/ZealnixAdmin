@@ -1,8 +1,8 @@
 import moment from "moment";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useOutletContext } from "react-router-dom";
 import AddNewModal from "../../../Components/AddNewModal/Index";
 import {
@@ -14,18 +14,19 @@ import {
   ProfileImageTemplate,
 } from "../../../Components/DataTableTemplates/Index";
 import {
-  HOSPITAL_ID,
+  // HOSPITAL_ID,
   ROWS_PER_PAGE,
   ROWS_PER_PAGE_OPTIONS,
 } from "../../../constants";
-import { AppDispatch, RootState } from "../../../redux/store";
+import { AppDispatch } from "../../../redux/store";
 import AddNewAppointments from "../AddNewAppointments";
 import {
   deleteAppointmentById,
-  fetchAllAppointments,
+  // fetchAllAppointments,
 } from "../store/appointmentMiddleware";
 import { CreateAppointmentPayload } from "../store/appointmentsType";
 import StatusUpdateDialog from "./StatusUpdateDialog";
+import { AllAppoinment } from "../mock";
 
 function AllAppointmentsTable() {
   const [selectedItem, setSelectedItem] = useState<CreateAppointmentPayload>();
@@ -33,33 +34,33 @@ function AllAppointmentsTable() {
   const [showStatusDialog, setShowStatusDialog] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-  const { appointments } = useSelector<
-    RootState,
-    RootState["appointmentReducers"]
-  >((state) => state.appointmentReducers);
+  // const { appointments } = useSelector<
+  //   RootState,
+  //   RootState["appointmentReducers"]
+  // >((state) => state.appointmentReducers);
   const dispatch = useDispatch<AppDispatch>();
   const { search, date } = useOutletContext<any>();
 
-  const fetchData = async () => {
-    const defaultIncludeQuery = {
-      filter: {
-        where: {
-          hospitalId: HOSPITAL_ID,
-          appointmentDate: moment(date).startOf("day").toISOString(),
-        },
-        include: ["hospital", "doctor", "department", "patient"],
-      },
-    };
-    await dispatch(
-      fetchAllAppointments(
-        encodeURI(JSON.stringify(defaultIncludeQuery.filter))
-      )
-    );
-  };
+  // const fetchData = async () => {
+  //   const defaultIncludeQuery = {
+  //     filter: {
+  //       where: {
+  //         hospitalId: HOSPITAL_ID,
+  //         appointmentDate: moment(date).startOf("day").toISOString(),
+  //       },
+  //       include: ["hospital", "doctor", "department", "patient"],
+  //     },
+  //   };
+  //   await dispatch(
+  //     fetchAllAppointments(
+  //       encodeURI(JSON.stringify(defaultIncludeQuery.filter))
+  //     )
+  //   );
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, [date]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [date]);
 
   const handleAction = (action: any) => {
     const { type, payload } = action;
@@ -88,7 +89,7 @@ function AllAppointmentsTable() {
   const handleDeleteAppointment = async () => {
     await dispatch(deleteAppointmentById(selectedId));
     setShowConfirmation(false);
-    await fetchData();
+    // await fetchData();
   };
 
   const dateTemplateHelper = (
@@ -107,7 +108,7 @@ function AllAppointmentsTable() {
   return (
     <div>
       <DataTable
-        value={appointments}
+        value={AllAppoinment}
         responsiveLayout="scroll"
         globalFilter={search}
         paginator
@@ -120,19 +121,16 @@ function AllAppointmentsTable() {
           header="DOCTOR"
         />
         <Column
-          body={(rowData: any) =>
-            hotlinkTemplateHelper(rowData?.doctor?.employeeId)
-          }
-          header="EMP ID"
+          body={(rowData: any) => hotlinkTemplateHelper(rowData?.appointmentId)}
+          header="APPOINTMENT ID"
           headerClassName="table__staffs__id"
         />
-        <Column field="patient.name" header="PATIENT NAME" />
         <Column
-          body={(rowData: any) =>
-            DepartmentTemplateHelper(rowData?.doctor?.department?.name)
-          }
+          body={(rowData: any) => DepartmentTemplateHelper(rowData?.department)}
           header="DEPARTMENT"
         />
+        <Column field="name" header="PATIENT NAME" />
+        <Column field="appointmentType" header="APPOINTMENT TYPE" />
         <Column
           body={(rowData: any) =>
             dateTemplateHelper(

@@ -146,7 +146,7 @@ const getBookingByHour = (
 ) => {
   // find bookings starts in this in the current hour
 
-  const bookingsInCurrentHour = appointments.filter((item) => {
+  const bookingsInCurrentHour = appointments?.filter((item) => {
     const bookingStartingHour = moment()
       .startOf("day")
       .add({ minutes: item.appointmentRangeStart })
@@ -154,7 +154,7 @@ const getBookingByHour = (
     return bookingStartingHour === hour.toString();
   });
 
-  if (bookingsInCurrentHour.length >= 1) {
+  if (bookingsInCurrentHour?.length >= 1) {
     // pass the booking to a component which will handle style and position based on the star and end time
     return bookingsInCurrentHour.map((booking) => (
       <BookedSlotHelper
@@ -210,7 +210,7 @@ function AppointmentTimelineCalendar({
         <div className="header">
           <p>Doctors</p>
         </div>
-        {appointmentsData.map((resorce) => (
+        {appointmentsData?.map((resorce) => (
           <div className="resource__each">
             <DoctorProfileIcon
               name={resorce.name}
@@ -246,7 +246,7 @@ function AppointmentTimelineCalendar({
                   {getBookingByHour(
                     item.hour,
                     currentDate,
-                    resorce.slotDetails,
+                    resorce.doctor_schedule,
                     setSelectedSlotId,
                     setSelectedDoctorId,
                   )}
