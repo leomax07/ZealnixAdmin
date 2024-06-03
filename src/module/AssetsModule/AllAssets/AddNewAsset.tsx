@@ -17,13 +17,17 @@ import {
 import { BRANCH_ID, HOSPITAL_ID } from "../../../constants";
 import "./assetsStyle.scss";
 import { assetSchema } from "../../../utils/validationSchema";
-
+import { assets, types } from "../Asset.mock";
 interface Props {
   visible?: boolean;
   width?: string;
   setVisible: Function;
   isEditing?: boolean;
   selectedItem?: AssetType;
+}
+interface City {
+  name: string;
+  code: string;
 }
 
 function AddNewAsset({
@@ -41,14 +45,21 @@ function AddNewAsset({
     imageUrl: "",
   };
   const [assetdata, setAssetData] = useState<AssetType>(initialState);
+  const [dropData, setdropData] = useState({});
 
-  const dispatch = useDispatch<AppDispatch>();
-  const { assetCategories } = useSelector<RootState, RootState["assetReducer"]>(
-    (state) => state.assetReducer
-  );
+  // const dispatch = useDispatch<AppDispatch>();
+  // const { assetCategories } = useSelector<RootState, RootState["assetReducer"]>(
+  //   (state) => state.assetReducer
+  // );
+  const handleChangeDrop = (e: any) => {
+    setSelectedCity(e.value);
+    
+  };
+  const [selectedCity, setSelectedCity] = useState<City | null>(null);
+
 
   useEffect(() => {
-    dispatch(getAllAssetCategories({}));
+    // dispatch(getAllAssetCategories({}));
   }, []);
 
   useEffect(() => {
@@ -77,14 +88,14 @@ function AddNewAsset({
       delete payload.unassigned;
       // eslint-disable-next-line no-underscore-dangle
       delete payload._id;
-      res = await dispatch(updateAsset(payload));
+      // res = await dispatch(updateAsset(payload));
     } else {
-      res = await dispatch(createAsset(payload));
+      // res = await dispatch(createAsset(payload));
     }
-    if (res.meta.requestStatus === "fulfilled") {
-      dispatch(getAssets({}));
-      setVisible(!visible);
-    }
+    // if (res?.meta?.requestStatus === "fulfilled") {
+    //   // dispatch(getAssets({}));
+    //   setVisible(!visible);
+    // }
   };
 
   const { errors, touched, handleSubmit, handleBlur } = useFormik({
@@ -147,14 +158,15 @@ function AddNewAsset({
           <FilterDropdown
             classNames="full__width"
             label="Category"
-            items={assetCategories}
+            items={types}
             name="assetCategoryId"
+            // optionLabel="assetCategoryId"
             optionLabel="name"
             optionValue="id"
-            value={assetdata.assetCategoryId}
+            value={selectedCity ? selectedCity : {}}
             required
             onBlur={handleBlur}
-            handleChange={handleChange}
+            handleChange={handleChangeDrop}
             error={touched.assetCategoryId && errors.assetCategoryId}
           />
         </div>

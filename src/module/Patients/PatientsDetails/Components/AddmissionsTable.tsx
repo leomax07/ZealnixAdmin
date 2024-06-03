@@ -8,6 +8,7 @@ import {
 } from "../../../../Components/DataTableTemplates/Index";
 import { PHARMACY_STOCK_DATA } from "../../../../constants";
 import DetailsTabHeader from "./DetailsTabHeader";
+// import { admissions } from "../../patients.mock";
 
 function AddmissionsTable() {
   const handleAction = () => {};
@@ -16,7 +17,11 @@ function AddmissionsTable() {
       <DetailsTabHeader />
       <DataTable value={PHARMACY_STOCK_DATA}>
         <Column selectionMode="multiple" />
-        <Column header="DEPARTMENT" body={CategoryTemplateHelper} />
+        <Column
+          header="DEPARTMENT"
+          field="phone"
+          // body={CategoryTemplateHelper}
+        />
         <Column
           header="DATE PERIOD"
           body={(row) => tableDateTemplate(row.date)}

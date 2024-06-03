@@ -25,7 +25,7 @@ import {
   removeEmptyObject,
 } from "../../../utils/reusableFunctions";
 import { StaffDetail } from "../store/sfattsTypes";
-
+import { Designation } from "../../AssetsModule/Asset.mock";
 function AddNewStaff({
   isEdit,
   visible,
@@ -36,6 +36,8 @@ function AddNewStaff({
 }: NewStaffDialogProps) {
   const { type } = useParams();
   const dispatch = useDispatch<AppDispatch>();
+  const [selectedCity, setSelectedCity] = useState({});
+
   const { departments } = useSelector<
     RootState,
     RootState["departmentsReducers"]
@@ -230,7 +232,7 @@ function AddNewStaff({
             <FilterDropdown
               label="Designation"
               classNames="full__width"
-              items={designations}
+              items={Designation}
               optionLabel="name"
               optionValue="id"
               onBlur={handleBlur}

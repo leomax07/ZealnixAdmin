@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ArrowLeft from "../../../assets/ArrowLeft";
 import ButtonComponent from "../../../Components/Buttons/Index";
 import { CategoryTemplateHelper } from "../../../Components/DataTableTemplates/Index";
@@ -8,23 +8,45 @@ import { PATIENT_DETAIL } from "../../../constants";
 import BloodPressure from "../../../assets/BloodPressure";
 import BloodSugarIcon from "../../../assets/BloodSugarIcon";
 import TabComponent from "../../../Components/Tab/tab";
-import { AppDispatch, RootState } from "../../../redux/store";
-import { getPatientDetailById } from "../store/patientMiddleware";
+import { RootState } from "../../../redux/store";
+// import { getPatientDetailById } from "../store/patientMiddleware";
 import { calculateAgeFromDate } from "../../../utils/reusableFunctions";
 
 function PatientsDetailsScreen() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const patientDetail = PATIENT_DETAIL;
   const { id } = useParams();
-  const dispatch = useDispatch<AppDispatch>();
-  const { patient }: any = useSelector<
-    RootState,
-    RootState["patientsReducers"]
-  >((state) => state.patientsReducers);
+  const patient = {
+    name: "John Doe",
+    dateOfBirth: "1980-05-20",
+    gender: "Male",
+    profilePic: "http://example.com/profile.jpg",
+    status: "Recovered",
+    bloodGroup: "O+",
+    bloodPressure: "120/80",
+    bloodSugar: "90 mg/dL",
+    department: "Cardiology",
+    lastVisited: "2024-05-01",
+    email: "johndoe@example.com",
+    phone: "1234567890",
+    weightInKg: 75,
+    heightInCm: 180,
+    maritalStatus: "Married",
+    address: "123 Main St, Cityville, Country",
+    illnessHistory: ["Diabetes", "Hypertension"],
+    emergencyContactName: "Jane Doe",
+    emergencyContactPhone: "0987654321",
+  };
+
+  // const dispatch = useDispatch<AppDispatch>();
+  // const { patient }: any = useSelector<
+  //   RootState,
+  //   RootState["patientsReducers"]
+  // >((state) => state.patientsReducers);
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getPatientDetailById(id || ""));
+    //   dispatch(getPatientDetailById(id || ""));
   }, [id]);
 
   const goBack = () => {
@@ -88,8 +110,11 @@ function PatientsDetailsScreen() {
               <div className="name__and__other__details">
                 <div className="name">{patient?.name}</div>
                 <div className="age__and__sex">
-                  {`${
+                  {/* {`${
                     calculateAgeFromDate(patient?.dateOfBirth) || "NA"
+                  } Yrs, ${patient?.gender}`} */}
+                   {`${
+                    CategoryTemplateHelper(patient?.dateOfBirth) || "NA"
                   } Yrs, ${patient?.gender}`}
                 </div>
                 <div className="blood__and__type">

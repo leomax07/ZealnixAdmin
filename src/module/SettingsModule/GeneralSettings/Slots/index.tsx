@@ -27,7 +27,7 @@ import {
 import { EditSlotProps, SlotType } from "./store/slotsTypes";
 import ViewDotorsInSlots from "./ViewDoctosInSlots";
 import { slotSchema } from "../../../../utils/validationSchema";
-
+import { slotsTableData } from "../../Settings.mock";
 function SlotsListing() {
   const [slotData, setSlotData] = useState<any>({
     appointmentRangeStart: "",
@@ -45,12 +45,12 @@ function SlotsListing() {
   const [selectedId, setSelectedId] = useState("");
   const [showConfirmation, setShowConformation] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-  const { staffs } = useSelector<RootState, RootState["staffsReducers"]>(
-    (state) => state.staffsReducers,
-  );
-  const { slots } = useSelector<RootState, RootState["slotsReducers"]>(
-    (state) => state.slotsReducers,
-  );
+  // const { staffs } = useSelector<RootState, RootState["staffsReducers"]>(
+  //   (state) => state.staffsReducers
+  // );
+  // const { slots } = useSelector<RootState, RootState["slotsReducers"]>(
+  //   (state) => state.slotsReducers
+  // );
 
   // to open and close modal
   const toggleModal = () => {
@@ -94,10 +94,10 @@ function SlotsListing() {
     const payload = {
       ...slotData,
       appointmentRangeStart: convertTimeStringToMinutes(
-        slotData.appointmentRangeStart,
+        slotData.appointmentRangeStart
       ),
       appointmentRangeEnd: convertTimeStringToMinutes(
-        slotData.appointmentRangeEnd,
+        slotData.appointmentRangeEnd
       ),
       regularSlot: Number(slotData.regularSlot),
       emergencySlot: Number(slotData.emergencySlot),
@@ -162,7 +162,7 @@ function SlotsListing() {
     return `${startString} to ${endString}`;
   };
 
-  const doctorCountHelper = (rowData: SlotType) => rowData.doctorIds.length;
+  const doctorCountHelper = (rowData: SlotType) => rowData?.doctorIds?.length;
 
   const viewDoctorTemplate = (rowData: SlotType) => (
     <div
@@ -183,10 +183,10 @@ function SlotsListing() {
     const data = {
       ...payload,
       appointmentRangeStart: new Date(
-        concertMinutesToTimeString(payload.appointmentRangeStart),
+        concertMinutesToTimeString(payload.appointmentRangeStart)
       ),
       appointmentRangeEnd: new Date(
-        concertMinutesToTimeString(payload.appointmentRangeEnd),
+        concertMinutesToTimeString(payload.appointmentRangeEnd)
       ),
     } as EditSlotProps;
     switch (type) {
@@ -208,12 +208,12 @@ function SlotsListing() {
     <div className="slot__listing__container">
       <div className="header">Appointment schedules</div>
       <div className="slot__table__container">
-        <DataTable value={slots}>
+        <DataTable value={slotsTableData}>
           <Column header="SLOT HOURS" body={handleSlotTiming} field="start" />
           <Column header="REGULAR (MAX SLOTS)" field="regularSlot" />
           <Column header="EMERGENCY (MAX SLOTS)" field="emergencySlot" />
           <Column header="VIDEO (MAX SLOTS)" field="videoSlot" />
-          <Column header="DOCTORS" body={doctorCountHelper} />
+          <Column header="DOCTORS" field="doctors" />
           <Column body={viewDoctorTemplate} />
           <Column
             body={(rowData: SlotType) =>
@@ -327,7 +327,7 @@ function SlotsListing() {
               classNames="full__width"
               label="Doctors"
               filter
-              items={staffs}
+              items={[]}
               optionLabel="name"
               optionValue="id"
               value={slotData.doctorIds}

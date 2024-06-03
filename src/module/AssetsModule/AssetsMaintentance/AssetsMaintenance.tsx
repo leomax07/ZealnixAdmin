@@ -21,19 +21,19 @@ import { AssetMaintenances } from "../store/assetTypes";
 import AddNewModal from "../../../Components/AddNewModal/Index";
 import AddNewAssetMaintenance from "../AllAssets/AddNewAssetMaintenance";
 import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from "../../../constants";
-
+import { assetMaintenance } from "../Asset.mock";
 function AssetsMaintenance() {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const [selectedItem, setSelectedItem] = useState<AssetMaintenances>();
   const [showEdit, setShowEdit] = useState(false);
   const [endMaintenance, setEndMaintenance] = useState(false);
 
-  const { assetMaintenance } = useSelector<
-    RootState,
-    RootState["assetReducer"]
-  >((state) => state.assetReducer);
+  // const { assetMaintenance } = useSelector<
+  //   RootState,
+  //   RootState["assetReducer"]
+  // >((state) => state.assetReducer);
 
   const fetchData = async () => {
     const defaultIncludeQuery: any = {
@@ -45,7 +45,7 @@ function AssetsMaintenance() {
         ],
       },
     };
-    await dispatch(getAssetMaintenances(defaultIncludeQuery.filter));
+    // await dispatch(getAssetMaintenances(defaultIncludeQuery.filter));
   };
 
   useEffect(() => {
@@ -80,9 +80,9 @@ function AssetsMaintenance() {
   };
 
   const handleDeleteReport = async () => {
-    await dispatch(deleteMaintenance(selectedId));
+    // await dispatch(deleteMaintenance(selectedId));
     setShowConfirmation(false);
-    await dispatch(getAssetMaintenances({}));
+    // await dispatch(getAssetMaintenances({}));
   };
 
   const handleEndMaintenance = async () => {
@@ -94,10 +94,10 @@ function AssetsMaintenance() {
       delete payload.assetItem;
       delete payload.lastAssignedTo;
       delete payload.asset;
-      await dispatch(updateMaintenance(payload)).then(() => {
-        dispatch(getAssetMaintenances({}));
-        setEndMaintenance(!endMaintenance);
-      });
+      // await dispatch(updateMaintenance(payload)).then(() => {
+      //   // dispatch(getAssetMaintenances({}));
+      //   setEndMaintenance(!endMaintenance);
+      // });
     } catch (err) {
       console.log(err);
     }
@@ -114,20 +114,21 @@ function AssetsMaintenance() {
         paginatorTemplate={paginatorTemplate}
       >
         <Column
-          field="name"
+          field="itemName"
           header="ASSET NAME"
           headerClassName="table__asset__id"
-          body={(rowData: any) => ItemName(rowData.assetItem)}
+          // body={(rowData: any) => ItemName(rowData.assetItem)}
         />
         <Column
-          field="name"
-          body={(rowData: any) => EmployeeIDTemplate(rowData.assetItem)}
+          field="itemID"
+          // body={(rowData: any) => EmployeeIDTemplate(rowData.assetItem)}
           header="ASSET ID"
           headerClassName="table__asset__id"
         />
         <Column
           header="ITEM DETAILS"
-          body={(rowData: any) => ItemName(rowData.asset)}
+          field="itemDetails"
+          // body={(rowData: any) => ItemName(rowData.asset)}
         />
         <Column
           body={(rowData: any) =>

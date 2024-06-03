@@ -25,17 +25,17 @@ export default function AssignAsset({
   AssetItemData,
   getAssetItems,
 }: Props) {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
   const initialState = {
     assignedToId: "",
   };
   const [assignAsset, setAssignAsset] = useState<any>(initialState);
-  const { staffs } = useSelector<RootState, RootState["staffsReducers"]>(
-    (state) => state.staffsReducers
-  );
+  // const { staffs } = useSelector<RootState, RootState["staffsReducers"]>(
+  //   (state) => state.staffsReducers
+  // );
   useEffect(() => {
-    dispatch(getStaffsByType({}))
+    // dispatch(getStaffsByType({}))
   }, [])
   
 
@@ -57,8 +57,8 @@ export default function AssignAsset({
         assignedToId: assignAsset.assignedToId,
         id: AssetItemData?.id,
       };
-      await dispatch(updateAssetItem(payload));
-      await getAssetItems()
+      // await dispatch(updateAssetItem(payload));
+      // await getAssetItems()
       // dispatch(getAllAssetItems({}));
       setVisible(!visible);
     } catch (err) {
@@ -111,7 +111,7 @@ export default function AssignAsset({
             <FilterDropdown
               classNames="full__width"
               label="Assignee"
-              items={staffs}
+              items={[]}
               name="assignedToId"
               optionLabel="name"
               optionValue="id"

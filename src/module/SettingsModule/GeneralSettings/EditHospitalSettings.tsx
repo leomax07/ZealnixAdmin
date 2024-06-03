@@ -62,10 +62,10 @@ export default function EditHospitalSettings({
     RootState,
     RootState["generalSettingsReducers"]
   >((state) => state.generalSettingsReducers);
-  const { branchDetail } = useSelector<
-    RootState,
-    RootState["branchesReducers"]
-  >((state) => state.branchesReducers);
+  // const { branchDetail } = useSelector<
+  //   RootState,
+  //   RootState["branchesReducers"]
+  // >((state) => state.branchesReducers);
   const [state, setState] = useState<HospitalPropType>(defaultValue);
   const [branchState, setBranchState] = useState({
     id: "",
@@ -83,13 +83,13 @@ export default function EditHospitalSettings({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settingsData]);
 
-  useEffect(() => {
-    setBranchState({
-      id: branchDetail.id,
-      isMainBranch: branchDetail.isMainBranch,
-      name: branchDetail.name,
-    });
-  }, [branchDetail]);
+  // useEffect(() => {
+  //   setBranchState({
+  //     id: branchDetail.id,
+  //     isMainBranch: branchDetail.isMainBranch,
+  //     name: branchDetail.name,
+  //   });
+  // }, [branchDetail]);
 
   const handleSave = async () => {
     const branchPayload = {

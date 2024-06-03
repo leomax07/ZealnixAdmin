@@ -17,16 +17,16 @@ import { AssetItem } from "../store/assetTypes";
 import AssignAsset from "./AssignAsset";
 import AddNewAssetMaintenance from "./AddNewAssetMaintenance";
 import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from "../../../constants";
-
+import { assetItem } from "../Asset.mock";
 interface Props {
   assetData: any;
 }
 
 export default function InUseAssetTable({ assetData }: Props) {
-  const dispatch = useDispatch<AppDispatch>();
-  const { assetItem } = useSelector<RootState, RootState["assetReducer"]>(
-    (state) => state.assetReducer
-  );
+  // const dispatch = useDispatch<AppDispatch>();
+  // const { assetItem } = useSelector<RootState, RootState["assetReducer"]>(
+  //   (state) => state.assetReducer
+  // );
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const [showEdit, setShowEdit] = useState(false);
@@ -44,7 +44,7 @@ export default function InUseAssetTable({ assetData }: Props) {
         include: [{ relation: "assignedTo" }],
       },
     };
-    await dispatch(getAllAssetItems(defaultIncludeQuery.filter));
+    // await dispatch(getAllAssetItems(defaultIncludeQuery.filter));
   };
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function InUseAssetTable({ assetData }: Props) {
   };
 
   const handleDeleteReport = async () => {
-    await dispatch(deleteAssetItem(selectedId));
+    // await dispatch(deleteAssetItem(selectedId));
     setShowConfirmation(false);
     await fetchData();
   };
@@ -101,7 +101,8 @@ export default function InUseAssetTable({ assetData }: Props) {
         paginatorTemplate={paginatorTemplate}
       >
         <Column
-          body={(rowData: any) => EmployeeIDTemplate(rowData)}
+          // body={(rowData: any) => EmployeeIDTemplate(rowData)}
+          field="itemID"
           header="ITEM ID"
           headerClassName="table__asset__id"
         />

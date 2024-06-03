@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import ButtonComponent from "../../../Components/Buttons/Index";
 import DatePickerComponent from "../../../Components/DatePicker/Index";
@@ -8,8 +8,8 @@ import FilterDropdown from "../../../Components/FilterDropdown/Index";
 import RadioButtonComponent from "../../../Components/RadioButton/Index";
 import TextAreaComponent from "../../../Components/TextAreaComponent/Index";
 import TextInputComponent from "../../../Components/TextInput/Index";
-import { setPatient } from "../store/patientsReducer";
-import { AppDispatch } from "../../../redux/store";
+// import { setPatient } from "../store/patientsReducer";
+// import { AppDispatch } from "../../../redux/store";
 import {
   genderOptions,
   marraigeStatusOptions,
@@ -30,7 +30,7 @@ function PatientInformation({
   edit,
   editPatient,
 }: PatientInformationType) {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
   const initialState = {
     name: "",
     gender: "",
@@ -94,7 +94,7 @@ function PatientInformation({
   };
 
   const savePatientDetails = () => {
-    dispatch(setPatient(patientDetails));
+    // dispatch(setPatient(patientDetails));
   };
   const handleRadioButton = (e: string) => {
     setPatientDetails((prev: any) => ({

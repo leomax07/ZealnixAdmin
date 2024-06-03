@@ -27,7 +27,7 @@ import {
 } from "./store/appointmentMiddleware";
 import { AddAppointmentStateType } from "./store/appointmentsType";
 import { appointmentSchema } from "../../utils/validationSchema";
-
+import { reportEdit } from "../Patients/patients.mock";
 interface Props {
 	visible: boolean;
 	setVisible: (args: boolean) => void;
@@ -269,9 +269,9 @@ function AddNewAppointments({
 					<FilterDropdown
 						label="Doctor"
 						classNames="full__width"
-						items={staffs}
+						items={reportEdit}
 						name="doctorId"
-						optionLabel="name"
+						optionLabel="headDoctor"
 						optionValue="id"
 						value={state.doctorId}
 						disabled={from === "slotDetails"}
@@ -287,9 +287,9 @@ function AddNewAppointments({
 					<FilterDropdown
 						label="Patient Name"
 						classNames="full__width"
-						items={patients}
+						items={reportEdit}
 						name="patientId"
-						optionLabel="name"
+						optionLabel="patients"
 						optionValue="id"
 						value={state.patientId}
 						disabled={isAppointment || isEditing}

@@ -38,7 +38,7 @@ export default function AddNewAssetItem({
     itemName: "",
     quantity: 0,
   };
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
   const [assetItemState, setAssetItemState] = useState<AssetItem>(initialState);
 
@@ -66,7 +66,7 @@ export default function AddNewAssetItem({
         include: [{ relation: "assignedTo" }],
       },
     };
-    await dispatch(getAllAssetItems(defaultIncludeQuery.filter));
+    // await dispatch(getAllAssetItems(defaultIncludeQuery.filter));
   };
 
   useEffect(() => {
@@ -84,14 +84,14 @@ export default function AddNewAssetItem({
         ...assetItemState,
         assetId: assetData?.id,
       };
-      res = await dispatch(updateAssetItem(editPayload));
+      // res = await dispatch(updateAssetItem(editPayload));
     } else {
-      res = await dispatch(createAssetItem(payload));
+      // res = await dispatch(createAssetItem(payload));
     }
-    if (res.meta.requestStatus === "fulfilled") {
-      await fetchData();
-      setVisible(!visible);
-    }
+    // if (res.meta.requestStatus === "fulfilled") {
+    //   await fetchData();
+    //   setVisible(!visible);
+    // }
   };
 
   const { errors, touched, handleSubmit, handleBlur, resetForm } = useFormik({

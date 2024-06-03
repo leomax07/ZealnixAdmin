@@ -18,19 +18,19 @@ import AddNewAsset from "./AddNewAsset";
 import RightSideBar from "../../../Components/RightSidebar/Index";
 import ViewAsset from "./ViewAsset";
 import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from "../../../constants";
-
+import { assets } from "../Asset.mock";
 const assignAvatar = (item: any) => (
-       <CommonAvatarGroup item={item.assignedDetails} size="medium" />
-   )
+  <CommonAvatarGroup item={item.assignedDetails} size="medium" />
+);
 
 export default function AssetsTable() {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const [showEdit, setShowEdit] = useState(false);
   const [selectedItem, setSelectedItem] = useState<any>();
 
-  // sidebar  
+  // sidebar
   const [showSidebar, setShowSidebar] = useState(false);
   const [assetView, setAssetView] = useState<any>(null);
 
@@ -38,9 +38,9 @@ export default function AssetsTable() {
     setShowSidebar((prev) => !prev);
   };
 
-  const { assets } = useSelector<RootState, RootState["assetReducer"]>(
-    (state) => state.assetReducer
-  );
+  // const { assets } = useSelector<RootState, RootState["assetReducer"]>(
+  //   (state) => state.assetReducer
+  // );
 
   const fetchData = async () => {
     const defaultIncludeQuery: any = {
@@ -48,7 +48,7 @@ export default function AssetsTable() {
         include: [{ relation: "assetCategory" }],
       },
     };
-    await dispatch(getAssets(defaultIncludeQuery.filter));
+    // await dispatch(getAssets(defaultIncludeQuery.filter));
   };
 
   useEffect(() => {
@@ -74,12 +74,10 @@ export default function AssetsTable() {
   };
 
   const handleDeleteReport = async () => {
-    await dispatch(deleteAsset(selectedId));
+    // await dispatch(deleteAsset(selectedId));
     setShowConfirmation(false);
     await fetchData();
   };
-
-
 
   const handleSelect = async (e: any) => {
     const target = e.originalEvent?.target?.className;
@@ -90,7 +88,6 @@ export default function AssetsTable() {
       toggleSidebar();
     }
   };
-
 
   return (
     <div className="table__height">
@@ -114,13 +111,15 @@ export default function AssetsTable() {
           header="ASSET NAME"
         />
         <Column
-          body={(rowData: any) => EmployeeIDTemplate(rowData)}
+          // body={(rowData: any) => EmployeeIDTemplate(rowData)}
           header="ASSET ID"
           headerClassName="table__asset__id"
+          field="assetID"
         />
         <Column
-          body={(rowData: any) => AssetsCategory(rowData?.assetCategory)}
+          // body={(rowData: any) => AssetsCategory(rowData?.assetCategory)}
           header="CATEGORY"
+          field="assetCategory"
         />
         <Column
           field="total"
@@ -130,10 +129,10 @@ export default function AssetsTable() {
         <Column field="in_use" header="IN USE" />
         <Column field="maintenance" header="IN MAINTENANCE" />
         <Column
-          body={assignAvatar}
+          // body={assignAvatar}
+          field="assignedTo"
           header="ASSIGNED TO"
           headerClassName="table__asset__assign"
-
         />
         <Column
           body={(rowData: any) => dateAndTimeFormat(rowData.createdAt)}

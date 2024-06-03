@@ -14,9 +14,31 @@ interface Props {
 
 function ViewDotorsInSlots({ slotId }: Props) {
   const dispatch = useDispatch<AppDispatch>();
-  const { slotDetails } = useSelector<RootState, RootState["slotsReducers"]>(
-    (state) => state.slotsReducers,
-  );
+  const slotDetails = {
+    doctorIds: ["123", "456", "789"], // Sample array of doctor IDs
+    appointmentRangeStart: 480, // Start time in minutes (assuming 480 is 8:00 AM)
+    appointmentRangeEnd: 600, // End time in minutes (assuming 600 is 10:00 AM)
+    regularSlot: 10,
+    emergencySlot: 5,
+    videoSlot: 3,
+    doctors: [
+      {
+        name: "Dr. John Doe",
+        employeeId: "123",
+        department: { name: "Cardiology" }
+      },
+      {
+        name: "Dr. Jane Smith",
+        employeeId: "456",
+        department: { name: "Neurology" }
+      },
+      // Add more doctor objects as needed...
+    ]
+  };
+  
+  // const { slotDetails } = useSelector<RootState, RootState["slotsReducers"]>(
+  //   (state) => state.slotsReducers,
+  // );
 
   const fetchData = async () => {
     const query = {
@@ -27,12 +49,12 @@ function ViewDotorsInSlots({ slotId }: Props) {
         },
       ],
     };
-    await dispatch(
-      getSlotsBySlotId({
-        id: slotId,
-        filter: encodeURI(JSON.stringify(query)),
-      }),
-    );
+    // await dispatch(
+    //   getSlotsBySlotId({
+    //     id: slotId,
+    //     filter: encodeURI(JSON.stringify(query)),
+    //   }),
+    // );
   };
 
   useEffect(() => {
@@ -45,7 +67,7 @@ function ViewDotorsInSlots({ slotId }: Props) {
           <div className="left">
             <p className="title">
               Doctors{" "}
-              <span className="light">({slotDetails?.doctorIds.length})</span>
+              <span className="light">({slotDetails?.doctorIds?.length})</span>
             </p>
             <div className="light__sub__text">
               Here’s the list of Doctors within the appointment time
@@ -60,7 +82,7 @@ function ViewDotorsInSlots({ slotId }: Props) {
             <img src={clockImg} alt="clock" />
             <p className="key">Timings : </p>
             <p className="value">
-              {formatMinutesToTimeString(slotDetails?.appointmentRangeStart)} -{" "}
+              {formatMinutesToTimeString( slotDetails?.appointmentRangeStart ?? "")} -{" "}
               {formatMinutesToTimeString(slotDetails?.appointmentRangeEnd)}
             </p>
           </div>

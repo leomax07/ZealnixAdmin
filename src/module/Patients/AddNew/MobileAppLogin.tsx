@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import RadioButtonComponent from "../../../Components/RadioButton/Index";
 import TextInputComponent from "../../../Components/TextInput/Index";
 import ButtonComponent from "../../../Components/Buttons/Index";
-import {
-	BRANCH_ID,
-	HOSPITAL_ID,
-	OUT_PATIENT_STATUS,
-	SORT_BY_CREATEDAT_DESC,
-	SUPER_ADMIN,
-} from "../../../constants";
-import {
-	createNewPatient,
-	getPatients,
-	updatePatient,
-} from "../store/patientMiddleware";
-import { AppDispatch, RootState } from "../../../redux/store";
+// import {
+// 	BRANCH_ID,
+// 	HOSPITAL_ID,
+// 	OUT_PATIENT_STATUS,
+// 	// SORT_BY_CREATEDAT_DESC,
+// 	SUPER_ADMIN,
+// } from "../../../constants";
+// import {
+// 	createNewPatient,
+// 	getPatients,
+// 	updatePatient,
+// } from "../store/patientMiddleware";
+// import {  RootState } from "../../../redux/store";
 import {
 	generateRandomPassword,
-	removeEmptyObject,
+	// removeEmptyObject,
 } from "../../../utils/reusableFunctions";
 
 interface MobileAppLoginType {
@@ -32,12 +32,12 @@ interface Props {
 }
 
 export default function MobileAppLogin({ edit = false, editPatient }: Props) {
-	const dispatch = useDispatch<AppDispatch>();
+	// const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
-	const { initialPatient } = useSelector<
-		RootState,
-		RootState["patientsReducers"]
-	>((state) => state.patientsReducers);
+	// const { initialPatient } = useSelector<
+	// 	RootState,
+	// 	RootState["patientsReducers"]
+	// >((state) => state.patientsReducers);
 	const [mobileLoginDetails, setMobileLoginDetails] =
 		useState<MobileAppLoginType>({
 			isMobileAppLoginEnabled: true,
@@ -69,51 +69,52 @@ export default function MobileAppLogin({ edit = false, editPatient }: Props) {
 
 	const handleSubmit = () => {
 		try {
-			const payload: any = {
-				...initialPatient,
-				...mobileLoginDetails,
-				status: OUT_PATIENT_STATUS,
-				hospitalId: HOSPITAL_ID,
-				branchId: BRANCH_ID,
-				createdBy: SUPER_ADMIN,
-				id: editPatient.id,
-			};
-			const updatedPayload = removeEmptyObject(payload);
+			// const payload: any = {
+			// 	...initialPatient,
+			// 	...mobileLoginDetails,
+			// 	status: OUT_PATIENT_STATUS,
+			// 	hospitalId: HOSPITAL_ID,
+			// 	branchId: BRANCH_ID,
+			// 	createdBy: SUPER_ADMIN,
+			// 	id: editPatient.id,
+			// };
+			// const updatedPayload = removeEmptyObject(payload);
 
 			if (edit) {
-				dispatch(updatePatient(updatedPayload)).then((res: any) => {
-					if (!res.error) {
-						dispatch(
-							getPatients({
-								order: SORT_BY_CREATEDAT_DESC,
-								where: {
-									hospitalId: HOSPITAL_ID,
-									branchId: BRANCH_ID,
-									status: OUT_PATIENT_STATUS,
-								},
-							})
-						).then(() => {
-							navigate("/patients/all");
-						});
-					}
-				});
+				navigate("/patients/all");
+				// dispatch(updatePatient(updatedPayload)).then((res: any) => {
+				// 	if (!res.error) {
+				// 		dispatch(
+				// 			getPatients({
+				// 				order: SORT_BY_CREATEDAT_DESC,
+				// 				where: {
+				// 					hospitalId: HOSPITAL_ID,
+				// 					branchId: BRANCH_ID,
+				// 					status: OUT_PATIENT_STATUS,
+				// 				},
+				// 			})
+				// 		).then(() => {
+				// 			navigate("/patients/all");
+				// 		});
+				// 	}
+				// });
 			} else {
-				dispatch(createNewPatient(updatedPayload)).then((res: any) => {
-					if (!res.error) {
-						dispatch(
-							getPatients({
-								order: SORT_BY_CREATEDAT_DESC,
-								where: {
-									hospitalId: HOSPITAL_ID,
-									branchId: BRANCH_ID,
-									status: OUT_PATIENT_STATUS,
-								},
-							})
-						).then(() => {
-							navigate("/patients/all");
-						});
-					}
-				});
+				// dispatch(createNewPatient(updatedPayload)).then((res: any) => {
+				// 	if (!res.error) {
+				// 		dispatch(
+				// 			getPatients({
+				// 				order: SORT_BY_CREATEDAT_DESC,
+				// 				where: {
+				// 					hospitalId: HOSPITAL_ID,
+				// 					branchId: BRANCH_ID,
+				// 					status: OUT_PATIENT_STATUS,
+				// 				},
+				// 			})
+				// 		).then(() => {
+				// 			navigate("/patients/all");
+				// 		});
+				// 	}
+				// });
 			}
 		} catch (err: any) {
 			console.log(err.message);

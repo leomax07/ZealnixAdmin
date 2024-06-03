@@ -38,7 +38,7 @@ export default function AddNewAssetMaintenance({
     endDate: "",
     reason: "",
   };
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
   const [maintenance, setMaintenance] =
     useState<AssetMaintenances>(initialState);
@@ -80,14 +80,14 @@ export default function AddNewAssetMaintenance({
       delete payload.lastAssignedTo;
       delete payload.asset;
 
-      res = await dispatch(updateMaintenance(payload));
+      // res = await dispatch(updateMaintenance(payload));
     } else {
-      res = await dispatch(createMaintenance(payload));
+      // res = await dispatch(createMaintenance(payload));
     }
-    if (res.meta.requestStatus === "fulfilled") {
-      await getAllAssetMaintence()
-      setVisible(!visible);
-    }
+    // if (res.meta.requestStatus === "fulfilled") {
+    //   await getAllAssetMaintence()
+    //   setVisible(!visible);
+    // }
   };
   const { errors, touched, handleSubmit, handleBlur, resetForm } = useFormik({
     initialValues: {

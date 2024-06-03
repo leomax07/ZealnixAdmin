@@ -8,19 +8,18 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import { fetchHospitalDetailById } from "./store/generalSettingsMiddleware";
 import { HOSPITAL_ID } from "../../../constants";
 import SlotsListing from "./Slots";
-
+import { settingsData } from "../Settings.mock";
 function GeneralSettings() {
   const [showEdit, setShowEdit] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const { settingsData } = useSelector<
-    RootState,
-    RootState["generalSettingsReducers"]
-  >((state) => state.generalSettingsReducers);
-  const { branchDetail } = useSelector<
-    RootState,
-    RootState["branchesReducers"]
-  >((state) => state.branchesReducers);
-
+  // const { settingsData } = useSelector<
+  //   RootState,
+  //   RootState["generalSettingsReducers"]
+  // >((state) => state.generalSettingsReducers);
+  // const { branchDetail } = useSelector<
+  //   RootState,
+  //   RootState["branchesReducers"]
+  // >((state) => state.branchesReducers);
 
   useEffect(() => {
     dispatch(fetchHospitalDetailById(HOSPITAL_ID));
@@ -29,7 +28,7 @@ function GeneralSettings() {
   const toggleEditModal = () => {
     setShowEdit((prev) => !prev);
   };
-  console.log("settings111", settingsData, branchDetail);
+  // console.log("settings111", settingsData, branchDetail);
   return (
     <div className="page__container settings__screen__container">
       <div className="settings__screen__header">
@@ -49,7 +48,6 @@ function GeneralSettings() {
           <div className="image__container">
             <img
               src={
-                settingsData?.profilePicUrl ??
                 "https://cdn3d.iconscout.com/3d/premium/thumb/hospital-6101753-5023487.png"
               }
               alt="hospital"
@@ -63,9 +61,7 @@ function GeneralSettings() {
         <div className="body__data__container">
           <div className="each__item">
             <div className="label">Address</div>
-            <div className="value">
-              {settingsData.address || "-"}
-            </div>
+            <div className="value">{settingsData.address || "-"}</div>
           </div>
           <div className="each__item">
             <div className="label">E-mail</div>
@@ -77,11 +73,11 @@ function GeneralSettings() {
           </div>
           <div className="each__item">
             <div className="label">Branch Name</div>
-            <div className="value">{branchDetail.name || '-'}</div>
+            <div className="value">{"xyz branch"}</div>
           </div>
           <div className="each__item">
             <div className="label">Main Branch</div>
-            <div className="value">{branchDetail.isMainBranch ? 'Yes': 'No'}</div>
+            <div className="value">{true ? "Yes" : "No"}</div>
           </div>
         </div>
         <div className="subscription__container">

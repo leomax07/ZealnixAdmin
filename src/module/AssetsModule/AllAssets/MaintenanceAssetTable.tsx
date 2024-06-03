@@ -21,23 +21,23 @@ import AddNewModal from "../../../Components/AddNewModal/Index";
 import { AssetMaintenances } from "../store/assetTypes";
 import AddNewAssetMaintenance from "./AddNewAssetMaintenance";
 import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from "../../../constants";
-
+import { assetMaintenancedata } from "../Asset.mock";
 interface Props {
   assetData: any;
 }
 
 export default function MaintenanceAssetTable({ assetData }: Props) {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const [selectedItem, setSelectedItem] = useState<AssetMaintenances>();
   const [showEdit, setShowEdit] = useState(false);
   const [endMaintenance, setEndMaintenance] = useState(false);
 
-  const { assetMaintenance } = useSelector<
-    RootState,
-    RootState["assetReducer"]
-  >((state) => state.assetReducer);
+  // const { assetMaintenance } = useSelector<
+  //   RootState,
+  //   RootState["assetReducer"]
+  // >((state) => state.assetReducer);
 
   const fetchData = async () => {
     const defaultIncludeQuery: any = {
@@ -48,7 +48,7 @@ export default function MaintenanceAssetTable({ assetData }: Props) {
         include: [{ relation: "lastAssignedTo" }, { relation: "assetItem" }],
       },
     };
-    await dispatch(getAssetMaintenances(defaultIncludeQuery.filter));
+    // await dispatch(getAssetMaintenances(defaultIncludeQuery.filter));
   };
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function MaintenanceAssetTable({ assetData }: Props) {
     }
   };
   const handleDeleteReport = async () => {
-    await dispatch(deleteMaintenance(selectedId));
+    // await dispatch(deleteMaintenance(selectedId));
     setShowConfirmation(false);
     await fetchData();
   };
@@ -103,10 +103,10 @@ export default function MaintenanceAssetTable({ assetData }: Props) {
       };
       delete payload.assetItem;
       delete payload.lastAssignedTo;
-      await dispatch(updateMaintenance(payload)).then(() => {
-        fetchData();
-        setEndMaintenance(!endMaintenance);
-      });
+      // await dispatch(updateMaintenance(payload)).then(() => {
+      //   fetchData();
+      //   setEndMaintenance(!endMaintenance);
+      // });
     } catch (err) {
       console.log(err);
     }
@@ -115,7 +115,7 @@ export default function MaintenanceAssetTable({ assetData }: Props) {
   return (
     <div className="table__height">
       <DataTable
-        value={assetMaintenance}
+        value={assetMaintenancedata}
         responsiveLayout="scroll"
         paginator
         rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
@@ -123,8 +123,8 @@ export default function MaintenanceAssetTable({ assetData }: Props) {
         paginatorTemplate={paginatorTemplate}
       >
         <Column
-          field="name"
-          body={(rowData: any) => EmployeeIDTemplate(rowData.assetItem)}
+          field="itemID"
+          // body={(rowData: any) => EmployeeIDTemplate(rowData.assetItem)}
           header="ITEM ID"
           headerClassName="table__asset__id"
         />

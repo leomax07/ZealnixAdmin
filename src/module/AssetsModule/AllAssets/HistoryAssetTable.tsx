@@ -12,17 +12,17 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import { getAssetHistory } from "../store/assetMiddleware";
 import { dateAndTimeFormat } from "../../../utils/reusableFunctions";
 import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from "../../../constants";
-
+import { assetHistory } from "../Asset.mock";
 interface Props {
   assetData: any;
 }
 
 export default function HistoryAssetTable({ assetData }: Props) {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
-  const { assetHistory } = useSelector<RootState, RootState["assetReducer"]>(
-    (state) => state.assetReducer
-  );
+  // const { assetHistory } = useSelector<RootState, RootState["assetReducer"]>(
+  //   (state) => state.assetReducer
+  // );
 
   const fetchData = async () => {
     const defaultIncludeQuery: any = {
@@ -33,7 +33,7 @@ export default function HistoryAssetTable({ assetData }: Props) {
         include: [{ relation: "assignedTo" }, { relation: "assetItem" }],
       },
     };
-    await dispatch(getAssetHistory(defaultIncludeQuery.filter));
+    // await dispatch(getAssetHistory(defaultIncludeQuery.filter));
   };
 
   useEffect(() => {
@@ -50,8 +50,8 @@ export default function HistoryAssetTable({ assetData }: Props) {
         paginatorTemplate={paginatorTemplate}
       >
         <Column
-          field="name"
-          body={(rowData: any) => EmployeeIDTemplate(rowData.assetItem)}
+          field="itemID"
+          // body={(rowData: any) => EmployeeIDTemplate(rowData.assetItem)}
           header="ITEM ID"
           headerClassName="table__asset__id"
         />
