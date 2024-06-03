@@ -7,7 +7,7 @@ import {
   LayoutHierarchyIcon,
   StepChartIcon,
   SettingsIcon,
-  ApplicationsIcon,
+  // ApplicationsIcon,
   WarningSignIcon,
   TimelineLineChartIcon,
 } from "evergreen-ui";
@@ -109,14 +109,14 @@ const sideMenu = [
   //   },
   //   to: "/Zealeye_CDS",
   // },
-  {
-    label: "Scratch Pad",
-    Icon: {
-      inActive: <ApplicationsIcon size={20} />,
-      active: <ApplicationsIcon size={20} color="#1890FF" />,
-    },
-    to: "/scratchpad",
-  },
+  // {
+  //   label: "Scratch Pad",
+  //   Icon: {
+  //     inActive: <ApplicationsIcon size={20} />,
+  //     active: <ApplicationsIcon size={20} color="#1890FF" />,
+  //   },
+  //   to: "/scratchpad",
+  // },
   {
     label: "Settings",
     Icon: {

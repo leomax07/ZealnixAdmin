@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../redux/store";
+import {  useState } from "react";
+import {  useSelector } from "react-redux";
+import {  RootState } from "../../../redux/store";
 import GridAndListToggleHeader from "../../../Components/GridAndListToggleHeader/Index";
 import { PHARMACY_STOCK_DATA } from "../../../constants";
 import PharmacyGridList from "../Components/PharmacyGridList";
 import AddNewInventory from "./Dialog/AddNewInventory";
 import PharmacyInventoryTable from "./PharmacyInventoryTable";
-import { fetchInventoryStocks } from "../Store/pharmacyMiddleware";
+// import { fetchInventoryStocks } from "../Store/pharmacyMiddleware";
 
 export interface RowType {
   drugId?: string;
@@ -17,7 +17,7 @@ export interface RowType {
 }
 
 function PharmacyScreen() {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
   const { inventoryStockList } = useSelector<
     RootState,
     RootState["pharmacyReducer"]
@@ -32,15 +32,15 @@ function PharmacyScreen() {
   };
 
   // Functionality used to handle inventory list
-  const listInventoryStocks = async () => {
-    await dispatch(fetchInventoryStocks());
-  };
+  // const listInventoryStocks = async () => {
+  //   await dispatch(fetchInventoryStocks());
+  // };
 
   // <=============[LIFE CYCLE & WATCHERS]=============> //
 
-  useEffect(() => {
-    listInventoryStocks();
-  }, []);
+  // useEffect(() => {
+  //   listInventoryStocks();
+  // }, []);
 
   // <=============[TEMPLATE]=============> //
 

@@ -21,7 +21,7 @@ function MainComponent() {
                 path="/operation-theatre"
                 element={<OperationTheatreScreen />}
               />
-              <Route path="/human-resource" element={<HumanResourceScreen />} />
+              {/* <Route path="/human-resource" element={<HumanResourceScreen />} /> */}
               <Route path="/intensive-care" element={<IntensiveCareScreen />} />
               <Route
                 path="/operation-theatre"

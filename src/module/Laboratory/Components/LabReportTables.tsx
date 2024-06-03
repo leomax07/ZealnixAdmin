@@ -22,6 +22,7 @@ import AddNewModal from "../../../Components/AddNewModal/Index";
 import AddNewReport from "./AddNewReport";
 import { LaboratoryType } from "../store/laboratoryType";
 import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from "../../../constants";
+import { labtabledata } from "../mock";
 
 interface Props {
 	search?: string;
@@ -39,11 +40,12 @@ function LabReportTables({ search, labId }: Props) {
 	const { reports } = useSelector<RootState, RootState["laboratoryReducer"]>(
 		(state) => state.laboratoryReducer
 	);
-
+	console.log(reports)
 	const toggleSidebar = () => {
 		setShowSidebar((prev) => !prev);
 	};
 	const handleAction = (action: any) => {
+		console.log(action, "action..")
 		const { type, payload } = action;
 		switch (type) {
 			case "delete":
@@ -51,9 +53,11 @@ function LabReportTables({ search, labId }: Props) {
 				setShowConfirmation(true);
 				break;
 			case "edit":
-				setSelectedItem({
-					...payload,
-				});
+				setSelectedItem(
+					{
+						...payload,
+					}
+				);
 				setShowEdit(true);
 				break;
 
@@ -111,7 +115,7 @@ function LabReportTables({ search, labId }: Props) {
 				}
 			/>
 			<DataTable
-				value={reports}
+				value={labtabledata}
 				responsiveLayout="scroll"
 				globalFilter={search}
 				onRowClick={(e) => handleSelect(e)}
@@ -123,7 +127,7 @@ function LabReportTables({ search, labId }: Props) {
 				<Column
 					field="name"
 					header="PATIENT NAME"
-					body={(rowData: any) => ProfileImageTemplate(rowData?.patient)}
+					body={(rowData: any) => ProfileImageTemplate(rowData)}
 				/>
 				<Column
 					body={() => hotlinkTemplateHelper("p-100")}
@@ -137,7 +141,7 @@ function LabReportTables({ search, labId }: Props) {
 				/>
 				<Column
 					body={(rowData: any) =>
-						DepartmentTemplateHelper(rowData?.department?.name)
+						DepartmentTemplateHelper(rowData?.category)
 					}
 					header="CATEGORY"
 				/>
@@ -146,11 +150,11 @@ function LabReportTables({ search, labId }: Props) {
 					header="ILLNESS"
 				/>
 				<Column
-					body={(rowData: any) => ProfileImageTemplate(rowData?.labTechnician)}
+					body={(rowData: any) => ProfileImageTemplate(rowData)}
 					header="LAB TECHNICIAN"
 				/>
 				<Column
-					body={(rowData: any) => tableDateTemplate(rowData.testDateAndTime)}
+					body={(rowData: any) => tableDateTemplate(rowData.testDoneOn)}
 					header="TEST DONE ON"
 				/>
 				<Column

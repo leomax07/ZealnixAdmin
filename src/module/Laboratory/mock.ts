@@ -57,3 +57,108 @@ export const Labreport = [
         }
     }
 ]
+
+
+export const labtabledata=[
+    {
+      "name": "Ronald Richards",
+      "patientId": "LZ-08",
+      "testId": "LZ-08",
+      "category": "GENERAL",
+      "illness": "Angina",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "27 Oct 2022 11:02 AM",
+      "status": "active"
+    },
+    {
+      "name": "Jacob Jones",
+      "patientId": "JK-5",
+      "testId": "JK-5",
+      "category": "GENERAL",
+      "illness": "Angina",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "26 Oct 2022 6:56 PM",
+      "status": "Inactive"
+    },
+    {
+      "name": "Kathryn Murphy",
+      "patientId": "GX-034",
+      "testId": "GX-034",
+      "category": "GENERAL",
+      "illness": "CVD",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "27 Oct 2022 1:03 PM",
+      "status": "active"
+    },
+    {
+      "name": "Cameron Williamson",
+      "patientId": "M-849",
+      "testId": "M-849",
+      "category": "GENERAL",
+      "illness": "Diabetes",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "27 Oct 2022 8:30 AM",
+      "status": "Inactive"
+    },
+    {
+      "name": "Wade Warren",
+      "patientId": "K-3651",
+      "testId": "K-3651",
+      "category": "GENERAL",
+      "illness": "Depression",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "27 Oct 2022 2:33 PM",
+      "status": "Inactive"
+    },
+    {
+      "name": "Marvin McKinney",
+      "patientId": "ILIC-7",
+      "testId": "ILIC-7",
+      "category": "GENERAL",
+      "illness": "Heart Failure",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "27 Oct 2022 12:52 PM",
+      "status": "Inactive"
+    },
+    {
+      "name": "Robert Fox",
+      "patientId": "CQG-7157",
+      "testId": "CQG-7157",
+      "category": "GENERAL",
+      "illness": "Cholesterol",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "27 Oct 2022 1:58 PM",
+      "status": "active"
+    },
+    {
+      "name": "Annette Black",
+      "patientId": "FZRT-0371",
+      "testId": "FZRT-0371",
+      "category": "GENERAL",
+      "illness": "Angina",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "27 Oct 2022 4:18 AM",
+      "status": "active"
+    },
+    {
+      "name": "Floyd Miles",
+      "patientId": "N-5",
+      "testId": "N-5",
+      "category": "GENERAL",
+      "illness": "CVD",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "27 Oct 2022 11:56 AM",
+      "status": "Completed"
+    },
+    {
+      "name": "Jerome Bell",
+      "patientId": "EVQU-1",
+      "testId": "EVQU-1",
+      "category": "GENERAL",
+      "illness": "Hypertension",
+      "labTechnician": "Juste Adjanohoun",
+      "testDoneOn": "27 Oct 2022 6:22 AM",
+      "status": "Completed"
+    }
+  ]
+  

@@ -1,12 +1,30 @@
 export interface InventoryStockType {
-  _id: string;
-  image: string;
-  drugId: string;
+  id: string;
   name: string;
-  manufacturer: string;
+  drugId: string;
+  batchId: string;
+  branchId: string;
+  email: string;
+  phone: string;
   category: string;
-  totalStock: number;
+  patientName: string;
+  date: string;
+  bookedVia: string;
+  status: string;
+  manufacturer: string;
+  inStock: number;
+  unitPrice: number;
+  soldLast30Days: number;
+  stock: number;
+  totalAmount: number;
+  quantity: number;
+  sold: number;
+  pincodes: string;
+  noOfOrders: number;
+  riderId: string;
+  address: string;
 }
+
 
 export interface pharmacyStoreStateType {
   inventoryStockList: InventoryStockType[];

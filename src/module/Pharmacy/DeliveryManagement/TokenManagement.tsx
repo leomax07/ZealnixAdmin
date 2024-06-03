@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { useNavigate } from "react-router-dom";
@@ -8,10 +8,10 @@ import arrowLeft from "../../../assets/arrow-left.svg";
 import SearchInputComponent from "../../../Components/SearchInput/searchInput";
 import {
   DotsTemplate,
-  hotlinkTemplateHelper,
-  ProfileImageTemplate,
-  StatusTemplate,
-  tableDateTemplate,
+  // hotlinkTemplateHelper,
+  // ProfileImageTemplate,
+  // StatusTemplate,
+  // tableDateTemplate,
 } from "../../../Components/DataTableTemplates/Index";
 import { PHARMACY_STOCK_DATA } from "../../../constants";
 
@@ -47,7 +47,7 @@ export default function TokenManagement() {
   const handleBack = () => {
     navigate(-1);
   };
-
+console.log(PHARMACY_STOCK_DATA,"PHARMACY_STOCK_DATA...")
   return (
     <div className="page__container pharmacy__screen__container">
       <div className="header">
@@ -78,14 +78,22 @@ export default function TokenManagement() {
             <Column selectionMode="multiple" />
             <Column
               header="TOKEN ID"
-              body={(row) => hotlinkTemplateHelper(row.batchId)}
+              field="batchId"
+              // body={(row) => hotlinkTemplateHelper(row)}
             />
-            <Column header="CUSTOMER" body={ProfileImageTemplate} />
+            <Column header="CUSTOMER" 
+            field="name"
+            // body={ProfileImageTemplate}
+             />
             <Column
               header="TOKEN ISSUED ON"
-              body={tableDateTemplate(new Date().toString())}
+              field="riderId"
+              // body={tableDateTemplate(new Date().toString())}
             />
-            <Column header="STATUS" body={StatusTemplate} />
+            <Column header="STATUS" 
+            field="status"
+            // body={StatusTemplate}
+             />
             <Column body={DotsTemplate} />
           </DataTable>
         </div>

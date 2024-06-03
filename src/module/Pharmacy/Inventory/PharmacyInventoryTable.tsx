@@ -1,11 +1,10 @@
+import React, { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
-import { ProgressBar } from "primereact/progressbar";
+// import { ProgressBar } from "primereact/progressbar";
 import { Column } from "primereact/column";
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
-import { RowType } from "./PharmacyInventory";
-import { ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from "../../../constants";
+import { PHARMACY_STOCK_DATA, ROWS_PER_PAGE, ROWS_PER_PAGE_OPTIONS } from "../../../constants";
 import {
   pharmacyImageTemplate,
   paginatorTemplate,
@@ -19,34 +18,37 @@ import AddNewInventory from "./Dialog/AddNewInventory";
 import { deleteDrug } from "../Store/pharmacyMiddleware";
 import AddNewModal from "../../../Components/AddNewModal/Index";
 
-export function StockTemplateHelper({ totalStock }: InventoryStockType) {
-  const TOTAL_PERCENTAGE = 100;
-  const inStock = totalStock;
-  const stockPercentage = (inStock / totalStock) * TOTAL_PERCENTAGE;
-  return (
-    <div className="in__stock__container">
-      <p className="stock">{totalStock}</p>
-      <div className="progress__part">
-        <ProgressBar
-          className={stockPercentage > 50 ? "green" : "yellow"}
-          value={totalStock}
-        />
-      </div>
-    </div>
-  );
-}
+// export function StockTemplateHelper({ totalStock }: any) {
+//   console.log(totalStock,"totalStock.....")
+//   const TOTAL_PERCENTAGE = 100;
+//   const inStock = totalStock;
+//   const stockPercentage = (inStock / totalStock) * TOTAL_PERCENTAGE;
+//   return (
+//     <div className="in__stock__container">
+//       <p className="stock">{totalStock}</p>
+//       <div className="progress__part">
+//         <ProgressBar
+//           className={stockPercentage > 50 ? "green" : "yellow"}
+//           value={totalStock}
+//         />
+//       </div>
+//     </div>
+//   );
+// }
 
 interface PropType {
   dataList: InventoryStockType[];
 }
 
 function PharmacyInventoryTable({ dataList }: PropType) {
+  console.log(dataList)
   const dispatch = useDispatch<AppDispatch>();
   const [visible, setVisible] = useState(false);
   const [isEditDialog, setIsEditDialog] = useState(false);
   const [showInventoryDialog, setShowInventoryDialog] = useState(false);
   const [selectedInventoryData, setSelectedInventoryData] = useState<any>({});
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+  // const [selectedProducts, setSelectedProducts] = useState<any[]>([]);
 
   // <===============[METHODS]===================> //
 
@@ -56,7 +58,6 @@ function PharmacyInventoryTable({ dataList }: PropType) {
     const match = target.match(/overlay_action/g);
     if (match === null) setVisible(true);
   };
-
 
   // Functionality used to reset state after inventory dialog close
   const handleInventoryDialogClose = () => {
@@ -100,14 +101,14 @@ function PharmacyInventoryTable({ dataList }: PropType) {
 
   // <===============[TEMPLATES]===================> //
 
-  const categoryStyleHelper = (row: RowType) =>
+  const categoryStyleHelper = (row: any) =>
     row?.category ? (
-      <p className="catrgory__table__style">{row.category}</p>
+      <p className="category__table__style">{row.category}</p>
     ) : (
       ""
     );
 
-  const statusTemplateHelper = (row: RowType) => (
+  const statusTemplateHelper = (row: any) => (
     <div className="status__template__container">
       {row.status === "active" && <div className="active__status__badge" />}
       {row.status === "inactive" && <div className="inactive__status__badge" />}
@@ -119,12 +120,16 @@ function PharmacyInventoryTable({ dataList }: PropType) {
     <div>
       <div className="table__container">
         <DataTable
-          value={dataList}
+          value={PHARMACY_STOCK_DATA}
           paginator
           rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
           rows={ROWS_PER_PAGE}
           paginatorTemplate={paginatorTemplate}
           onRowClick={(e) => handleSelect(e)}
+          selectionMode="checkbox"
+          dataKey="id"
+          // selection={selectedProducts}
+          // onSelectionChange={(e: any) => setSelectedProducts(e.value)}
         >
           <Column selectionMode="multiple" />
           <Column
@@ -147,8 +152,8 @@ function PharmacyInventoryTable({ dataList }: PropType) {
           <Column header="MANUFACTURER" field="manufacturer" />
           <Column
             header="IN STOCK"
-            body={StockTemplateHelper}
-            field="totalStock"
+            // body={StockTemplateHelper}
+            field="inStock"
           />
           <Column header="UNIT PRICE" field="unitPrice" />
           <Column header="SOLD (Last 30 Days) " field="soldLast30Days" />
