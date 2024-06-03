@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { TOKEN } from "../../../constants";
 import { RootState } from "../../../redux/store";
 import HamIcon from "../../../Icon/hamIcon.svg";
-import logo from "../../../assets/logo.svg";
+// import logo from "../../../assets/logo.svg";
 import ProfileImg from "../../../Icon/profile.svg";
 import "./header.scss";
 
@@ -34,18 +34,20 @@ function Header() {
 		navigate("/login");
 	};
 
+	
+
 	// <===================[TEMPLATE]====================//
 	return (
 		<header className="main__header__container">
 			<div className="flexClassheader header__left">
 				<div>
 					<img
-						src={logo}
+						src="https://i.ibb.co/N62nHbY/zeal-ai.png"
 						alt="Logo"
 						className="logoSet header__left__logo"
 					/>
 				</div>
-				<div className="header__left__title">Zealnix</div>
+				{/* <div className="header__left__title">Zealnix</div> */}
 				<div
 					className="ham__menu__icon"
 					role="button"
