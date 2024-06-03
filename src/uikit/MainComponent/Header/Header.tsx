@@ -45,7 +45,7 @@ function Header() {
 						className="logoSet header__left__logo"
 					/>
 				</div>
-				<div className="header__left__title">Garuda</div>
+				<div className="header__left__title">Zealnix</div>
 				<div
 					className="ham__menu__icon"
 					role="button"

@@ -5,6 +5,7 @@ import HumanResourceScreen from "../../module/Human Resources/HumanResourseScree
 import OperationTheatreScreen from "../../module/Operation Theatre/OperationTheatreScreen";
 import "./maincomponent.css";
 import ProtectedLayout from "./ProtectedLayout";
+import IntensiveCareScreen from "../../module/IntensivecareScreen";
 
 function MainComponent() {
   return (
@@ -21,6 +22,7 @@ function MainComponent() {
                 element={<OperationTheatreScreen />}
               />
               <Route path="/human-resource" element={<HumanResourceScreen />} />
+              <Route path="/intensive-care" element={<IntensiveCareScreen />} />
               <Route
                 path="/operation-theatre"
                 element={<OperationTheatreScreen />}

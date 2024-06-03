@@ -8,7 +8,10 @@ import {
   StepChartIcon,
   SettingsIcon,
   ApplicationsIcon,
+  WarningSignIcon,
+  TimelineLineChartIcon,
 } from "evergreen-ui";
+// import { SubMenu } from "react-pro-sidebar";
 
 const sideMenu = [
   {
@@ -20,7 +23,7 @@ const sideMenu = [
     to: "/",
   },
   {
-    label: "Appointments",
+    label: "Doctor Allocations",
     Icon: {
       inActive: <NewPersonIcon size={20} />,
       active: <NewPersonIcon size={20} color="#1890FF" />,
@@ -51,16 +54,30 @@ const sideMenu = [
     },
     to: "/laboratory/x-ray",
   },
-  /* {
+   {
 		label: "Operation Theatre",
-		Icon: <WarningSignIcon size={20} />,
+    Icon: {
+      inActive:<WarningSignIcon size={20} />,
+      active: <WarningSignIcon size={20} color="#1890FF" />,
+    },
 		to: "/operation-theatre",
-	}, */
-  /* {
-		label: "Human Resources",
-		Icon: <PersonIcon size={20} />,
-		to: "/human-resource",
-	}, */
+	}, 
+  {
+    label: "Intensive care",
+    Icon: {
+      inActive: <TimelineLineChartIcon size={20} />,
+      active: <TimelineLineChartIcon size={20} color="#1890FF" />,
+    },
+    to: "/intensive-care",
+  },
+  {
+    label: "Human Resources",
+    Icon: {
+      inActive: <PeopleIcon size={20} />,
+      active: <PeopleIcon size={20} color="#1890FF" />,
+    },
+    to: "/human-resource",
+  },
   {
     label: "Assets",
     Icon: {
@@ -83,6 +100,15 @@ const sideMenu = [
     },
     to: "/pharmacy/inventory",
   },
+
+  // {
+  //   label: "Zealeye CDS",
+  //   Icon: {
+  //     inActive: <AddLocationIcon size={20} />,
+  //     active: <AddLocationIcon size={20} color="#1890FF" />,
+  //   },
+  //   to: "/Zealeye_CDS",
+  // },
   {
     label: "Scratch Pad",
     Icon: {
@@ -98,20 +124,21 @@ const sideMenu = [
       active: <SettingsIcon size={20} color="#1890FF" />,
     },
     to: "/settings",
-    subMenu: [
-      {
-        label: "General",
-        to: "/settings",
-      },
-      {
-        label: "Branches",
-        to: "/settings/branches",
-      },
-      {
-        label: "Masters",
-        to: "/settings/masters/designations",
-      },
-    ],
+    subMenu:[]
+    // subMenu: [
+    //   {
+    //     label: "General",
+    //     to: "/settings",
+    //   },
+    //   {
+    //     label: "Branches",
+    //     to: "/settings/branches",
+    //   },
+    //   {
+    //     label: "Masters",
+    //     to: "/settings/masters/designations",
+    //   },
+    // ],
   },
 ];
 
