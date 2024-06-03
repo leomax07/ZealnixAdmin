@@ -24,6 +24,7 @@ function PharmacyGridList({ list }: PropType) {
               src={stockItem.profileUrl || pharmacySample}
               alt="stockImage"
               className="image"
+              width="100%"
             />
           </div>
           <div className="details__container">
