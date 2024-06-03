@@ -1,25 +1,25 @@
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import GridAndListToggleHeader from "../../Components/GridAndListToggleHeader/Index";
 import TabComponent from "../../Components/Tab/tab";
-import { AppDispatch, RootState } from "../../redux/store";
-import {
-  deleteStaffById,
-  getStaffsByType,
-  patchStaff,
-} from "./store/staffsMiddleware";
+// import { AppDispatch, RootState } from "../../redux/store";
+// import {
+//   deleteStaffById,
+//   getStaffsByType,
+//   patchStaff,
+// } from "./store/staffsMiddleware";
 import AddNewModal from "../../Components/AddNewModal/Index";
 import {
-  DISABLED,
-  ENABLED,
+  // DISABLED,
+  // ENABLED,
   ROWS_PER_PAGE,
   ROWS_PER_PAGE_OPTIONS,
 } from "../../constants";
-import { fetchAllDepartments } from "../SettingsModule/Masters/Departments/store/departmentMiddleware";
-import { fetchAllDestinations } from "../SettingsModule/Masters/Designation/store/designation.middleware";
+// import { fetchAllDepartments } from "../SettingsModule/Masters/Departments/store/departmentMiddleware";
+// import { fetchAllDestinations } from "../SettingsModule/Masters/Designation/store/designation.middleware";
 import {
   dutyTimeTemplateHelper,
   OverLayTemplateHelper,
@@ -31,6 +31,7 @@ import { StaffDetail } from "./store/sfattsTypes";
 // eslint-disable-next-line import/no-cycle
 import StaffGridView from "./StaffGridView/Index";
 import AddNewStaff from "./AddNewStaff";
+import { StaffsData } from "./mock";
 
 export type TabOptions = {
   label: string;
@@ -52,10 +53,10 @@ function StaffsTable({ TabOptions }: StaffsScreenprops) {
   const [selectedStaffData, setSelectedStaffData] =
     useState<StaffDetail | null>(null);
   const { type } = useParams();
-  const dispatch = useDispatch<AppDispatch>();
-  const { staffs } = useSelector<RootState, RootState["staffsReducers"]>(
-    (store) => store.staffsReducers
-  );
+  // const dispatch = useDispatch<AppDispatch>();
+  // const { staffs } = useSelector<RootState, RootState["staffsReducers"]>(
+  //   (store) => store.staffsReducers
+  // );
   const navigate = useNavigate();
 
   // open and close add new staff modal
@@ -63,31 +64,31 @@ function StaffsTable({ TabOptions }: StaffsScreenprops) {
     setIsEditing(false);
     setShowAddNew((prev) => !prev);
   };
-
+console.log(selectedId)
   // Fetch initial data
   const handleFetchData = async () => {
-    const filter = {
-      filter: {
-        where: {
-          type,
-        },
-        include: [
-          {
-            relation: "department",
-          },
-        ],
-      },
-    };
-    await dispatch(getStaffsByType(filter));
+    // const filter = {
+    //   filter: {
+    //     where: {
+    //       type,
+    //     },
+    //     include: [
+    //       {
+    //         relation: "department",
+    //       },
+    //     ],
+    //   },
+    // };
+    // await dispatch(getStaffsByType(filter));
   };
 
-  useEffect(() => {
-    handleFetchData();
-    dispatch(fetchAllDepartments());
-    dispatch(fetchAllDestinations());
-    setSelectedTab(type);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type]);
+  // useEffect(() => {
+  //   handleFetchData();
+  //   dispatch(fetchAllDepartments());
+  //   dispatch(fetchAllDestinations());
+  //   setSelectedTab(type);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [type]);
 
   const handleSelect = (e: any, usertype: string | undefined) => {
     const target = e.originalEvent?.target?.className;
@@ -100,14 +101,14 @@ function StaffsTable({ TabOptions }: StaffsScreenprops) {
     if (match === null) navigate(`/staffs/${usertype}/${staffId}`);
   };
 
-  const handleStatusChange = async (id: string, status: string) => {
-    const payload = {
-      id,
-      status: status === ENABLED ? DISABLED : ENABLED,
-    };
-    await dispatch(patchStaff(payload));
-    await handleFetchData();
-  };
+  // const handleStatusChange = async (id: string, status: string) => {
+  //   const payload = {
+  //     id,
+  //     status: status === ENABLED ? DISABLED : ENABLED,
+  //   };
+  //   // await dispatch(patchStaff(payload));
+  //   await handleFetchData();
+  // };
 
   const handleEdit = (action: object | any) => {
     const data = { ...action.payload };
@@ -119,7 +120,7 @@ function StaffsTable({ TabOptions }: StaffsScreenprops) {
         setShowAddNew(true);
         break;
       case "disable":
-        handleStatusChange(action.payload.id, action.payload.status);
+        // handleStatusChange(action.payload.id, action.payload.status);
         break;
       case "delete":
         setSelectedId(action.payload.id);
@@ -137,7 +138,7 @@ function StaffsTable({ TabOptions }: StaffsScreenprops) {
   };
 
   const handleDelete = async () => {
-    await dispatch(deleteStaffById(selectedId));
+    // await dispatch(deleteStaffById(selectedId));
     await handleFetchData();
     setShowConfirmation(false);
   };
@@ -163,13 +164,13 @@ function StaffsTable({ TabOptions }: StaffsScreenprops) {
         <div>
           {isGridView ? (
             <StaffGridView
-              value={staffs || []}
+              value={StaffsData || []}
               handleEdit={handleEdit}
               type={type}
             />
           ) : (
             <DataTable
-              value={staffs || []}
+              value={StaffsData || []}
               globalFilter={search}
               onRowClick={(e) => handleSelect(e, type)}
               paginator

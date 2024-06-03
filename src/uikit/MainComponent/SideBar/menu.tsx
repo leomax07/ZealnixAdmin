@@ -23,7 +23,7 @@ const sideMenu = [
     to: "/",
   },
   {
-    label: "Doctor Allocations",
+    label: "Appointments",
     Icon: {
       inActive: <NewPersonIcon size={20} />,
       active: <NewPersonIcon size={20} color="#1890FF" />,
@@ -47,7 +47,7 @@ const sideMenu = [
     to: "/staffs/doctor",
   },
   {
-    label: "Lab Reports",
+    label: "Laboratory",
     Icon: {
       inActive: <LayoutHierarchyIcon size={20} />,
       active: <LayoutHierarchyIcon size={20} color="#1890FF" />,
