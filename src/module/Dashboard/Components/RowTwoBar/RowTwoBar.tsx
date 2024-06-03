@@ -11,13 +11,14 @@ import {
 	getPatientBarChartData,
 	getPatientsCountByDateRange,
 } from "../../store/dashboardscreenMiddleware";
+import { mockrightChartData } from "../../Dashboard.mock";
 
 function RowTwoBar() {
 	const [selected, setSelected] = useState(0);
 	const dispatch = useDispatch<AppDispatch>();
 	const [patientCount, setPatientCount] = useState({
-		currentWeekPatient: 0,
-		lastWeekPatient: 0,
+		currentWeekPatient: 20,
+		lastWeekPatient: 42,
 	});
 	const { patientsBarChartData } = useSelector<
 		RootState,
@@ -27,6 +28,7 @@ function RowTwoBar() {
 		data: {},
 		options: {},
 	});
+	console.log(patientData)
 
 	const dropdownOptions = [
 		{ label: "Week", value: 0 },
@@ -142,7 +144,7 @@ function RowTwoBar() {
 					/>
 				</div>
 			</div>
-			<BarChart chartData={patientData.data} />
+			<BarChart chartData={mockrightChartData} height="208px" />
 		</div>
 	);
 }

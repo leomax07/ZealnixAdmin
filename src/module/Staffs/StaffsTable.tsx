@@ -31,7 +31,7 @@ import { StaffDetail } from "./store/sfattsTypes";
 // eslint-disable-next-line import/no-cycle
 import StaffGridView from "./StaffGridView/Index";
 import AddNewStaff from "./AddNewStaff";
-import { StaffsData } from "./mock";
+import  StaffsData  from "./mock";
 
 export type TabOptions = {
   label: string;

@@ -1,37 +1,38 @@
-import moment from "moment";
+// import moment from "moment";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import {
 	tableDateTemplate,
 	paginatorTemplate,
 } from "../../../../Components/DataTableTemplates/Index";
 import {
 	ROWS_PER_PAGE_OPTIONS,
-	SORT_BY_CREATEDAT_DESC,
+	// SORT_BY_CREATEDAT_DESC,
 } from "../../../../constants";
-import { AppDispatch, RootState } from "../../../../redux/store";
-import { getLatestPatientList } from "../../store/dashboardscreenMiddleware";
+// import { AppDispatch, RootState } from "../../../../redux/store";
+// import { getLatestPatientList } from "../../store/dashboardscreenMiddleware";
+import { latestmockPatientList } from "../../Dashboard.mock";
 
 function LatestPatientsTable() {
-	const { latestPatientList } = useSelector<
-		RootState,
-		RootState["dashboardReducers"]
-	>((state) => state.dashboardReducers);
-	const dispatch = useDispatch<AppDispatch>();
+	// const { latestPatientList } = useSelector<
+	// 	RootState,
+	// 	RootState["dashboardReducers"]
+	// >((state) => state.dashboardReducers);
+	// const dispatch = useDispatch<AppDispatch>();
 
-	const fetchData = async () => {
-		const payload = {
-			filter: {
-				order: SORT_BY_CREATEDAT_DESC,
-			},
-		};
-		await dispatch(getLatestPatientList(payload));
-	};
+	// const fetchData = async () => {
+	// 	const payload = {
+	// 		filter: {
+	// 			order: SORT_BY_CREATEDAT_DESC,
+	// 		},
+	// 	};
+	// 	await dispatch(getLatestPatientList(payload));
+	// };
 
-	const calculateAge = (date: string | undefined) =>
-		!date ? "" : moment(new Date(date)).format("DD-MM-YYYY");
+	// const calculateAge = (date: string | undefined) =>
+	// 	!date ? "" : moment(new Date(date)).format("DD-MM-YYYY");
 
 	const tableStatusTemplate = (status: string) => (
 		<p className="to__camel__case">{status.replace("_", " ")}</p>
@@ -41,16 +42,16 @@ function LatestPatientsTable() {
 		<p className="blue__text to__camel__case">{name}</p>
 	);
 
-	useEffect(() => {
-		fetchData();
-	}, []);
+	// useEffect(() => {
+	// 	fetchData();
+	// }, []);
 	return (
 		<div className="latest__patient__table__container card">
 			<div className="header">
 				<p>Latest Patients</p>
 			</div>
 			<DataTable
-				value={latestPatientList}
+				value={latestmockPatientList}
 				paginator
 				rows={5}
 				rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
@@ -63,7 +64,7 @@ function LatestPatientsTable() {
 				<Column
 					header="DATE"
 					field="date"
-					body={(row) => tableDateTemplate(row.createdAt)}
+					body={(row) => tableDateTemplate(row.date)}
 				/>
 				<Column
 					header="NAME"
@@ -73,7 +74,7 @@ function LatestPatientsTable() {
 				<Column
 					header="AGE"
 					field="age"
-					body={(row) => calculateAge(row.dateOfBirth)}
+					// body={(row) => calculateAge(row.age)}
 				/>
 				<Column
 					header="GENDER"

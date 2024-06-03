@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 
 interface Props {
 	chartData?: any;
+	height?: any;
+	// width?: any
 }
 
-function BarChart({ chartData }: Props) {
+function BarChart({ chartData, height }: Props) {
 	const [chartOptions, setChartOptions] = useState({});
 
 	useEffect(() => {
@@ -26,18 +28,26 @@ function BarChart({ chartData }: Props) {
 					},
 				},
 			},
+			elements: {
+				bar: {
+					borderRadius: 10,
+					borderColor: "transparent", // Remove the border color here
+				},
+			},
 		};
 
 		setChartOptions(options);
 	}, []);
 
 	return (
-		<div className="">
+		<div className="overall_linestylechart">
 			{chartData && (
 				<Chart
 					type="bar"
 					data={chartData}
 					options={chartOptions}
+					height={height}
+					// width=100
 				/>
 			)}
 		</div>

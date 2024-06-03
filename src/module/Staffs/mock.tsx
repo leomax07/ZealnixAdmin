@@ -1,4 +1,4 @@
-export const StaffsData = [
+const StaffsData = [
   {
     id: "649e9e23e5426def42ba756f",
     employeeId: "DOC000004",
@@ -581,3 +581,4 @@ export const StaffsData = [
     },
   },
 ];
+export default StaffsData

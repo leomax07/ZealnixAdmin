@@ -1,7 +1,7 @@
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import BarChart from "../../../../Components/Chart/BarChart";
+// import BarChart from "../../../../Components/Chart/BarChart";
 import {
 	APPOINTMENT_STAT_WEEK,
 	IN_PATIENT_STATUS,
@@ -9,9 +9,12 @@ import {
 import { AppDispatch, RootState } from "../../../../redux/store";
 import patientsData from "../../../../utils/data";
 import { getInAndOutPatientBarChartData } from "../../store/dashboardscreenMiddleware";
+// import { mockBarChartData } from "../../Dashboard.mock";
+import Breakdownchart from "../../../../Components/Chart/Breakdownchart";
 
 function PatientInVsOut() {
 	const [chartData, setChargeData] = useState({});
+	console.log(chartData)
 	const dispatch = useDispatch<AppDispatch>();
 	const { inAndOutPatientBarChartData } = useSelector<
 		RootState,
@@ -72,7 +75,8 @@ function PatientInVsOut() {
 				<p className="title">Patient Breakdown</p>
 			</div>
 			<div className="patient__gender__line__chart">
-				<BarChart chartData={chartData} />
+				{/* <BarChart chartData={mockBarChartData}  height='280px' /> */}
+				<Breakdownchart/>
 				<div className="lengend__flex__evenly">
 					<div className="inpatient each__legend">
 						<div className="status" />

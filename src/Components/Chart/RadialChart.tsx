@@ -1,34 +1,39 @@
-import { useEffect, useState } from "react";
-import { Chart } from "primereact/chart";
+import { useState, useEffect } from 'react';
+import { Chart } from 'primereact/chart';
 
-interface Props {
-	data: any;
-}
-
-function RadialChart({ data }: Props) {
+export default function RadialChart() {
+	const [chartData, setChartData] = useState({});
 	const [chartOptions, setChartOptions] = useState({});
 
 	useEffect(() => {
+		// const documentStyle = getComputedStyle(document.documentElement);
+		const data = {
+			datasets: [
+				{
+					data: [300, 150],
+					backgroundColor: [
+						"#38BDF8",
+						"#2563EB",
+						// "gray"
+					],
+					
+				}
+			]
+		};
 		const options = {
-			cutout: "70%",
+			cutout: '60%',
 			plugins: {
-				legend: false,
-			},
+				legend: false // Remove legend
+			}
 		};
 
+		setChartData(data);
 		setChartOptions(options);
-	}, [data]);
+	}, []);
 
 	return (
-		<div className="flex justify-content-center">
-			<Chart
-				type="doughnut"
-				data={data}
-				options={chartOptions}
-				className="w-full md:w-30rem"
-			/>
+		<div className="card flex justify-content-center">
+			<Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" height='260px'/>
 		</div>
-	);
+	)
 }
-
-export default RadialChart;

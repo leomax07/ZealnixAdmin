@@ -5,14 +5,17 @@ import RadialChart from "../../../../Components/Chart/RadialChart";
 import FilterDropdown from "../../../../Components/FilterDropdown/Index";
 import { AppDispatch, RootState } from "../../../../redux/store";
 import { getPatientGenderStat } from "../../store/dashboardscreenMiddleware";
+// import { mockBarChartData } from "../../Dashboard.mock";
 
 function PatientGenderStatistics() {
 	const [selected, setSelected] = useState<number>(0);
 	const [genderData, setGenderData] = useState<any>({});
+	console.log(genderData)
 	const [count, setCount] = useState({
-		maleCount: 0,
-		femaleCount: 0,
+		maleCount: 10,
+		femaleCount:12,
 	});
+	console.log(count)
 	const { patientGenderStat } = useSelector<
 		RootState,
 		RootState["dashboardReducers"]
@@ -103,25 +106,35 @@ function PatientGenderStatistics() {
 				</div>
 			</div>
 			<div className="patient__gender__chart__container">
-				<RadialChart data={genderData} />
+				{/* <RadialChart data={mockBarChartData} /> */}
+				<RadialChart/>
 			</div>
 			<div className="lengends__container">
 				<div className="legend">
 					<div className="icon male__icon" />
 					<p>
-						Male: <span className="count">{count.maleCount}</span>
+						Male: <span className="count">
+							{/* {count.maleCount} */}
+							2300
+							</span>
 					</p>
 				</div>
 				<div className="legend">
 					<div className="icon female__icon" />
 					<p>
-						Female: <span className="count">{count.femaleCount}</span>
+						Female: <span className="count">
+							{/* {count.femaleCount} */}
+							275
+							</span>
 					</p>
 				</div>
 			</div>
 			<div className="total__count">
-				<p className="total__title">Total</p>
-				<p className="total">{count.maleCount + count.femaleCount}</p>
+				<p className="total__title">Total :</p>
+				<p className="total">
+					2575
+					{/* {count.maleCount + count.femaleCount} */}
+					</p>
 			</div>
 		</div>
 	);

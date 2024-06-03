@@ -11,12 +11,13 @@ import {
 	getAppointmentCountByDateRange,
 	getAppointmentGrapsByTypeAndDateRange,
 } from "../../store/dashboardscreenMiddleware";
+// import { mockChartData } from "../../Dashboard.mock"
 
 function RowTwoLine() {
 	const [selectedTab, setSelectedTab] = useState(1);
 	const [appointmentCount, setAppointmentCount] = useState({
-		currentWeekAppointmentCount: 0,
-		lastWeekAppointmentCount: 0,
+		currentWeekAppointmentCount: 20,
+		lastWeekAppointmentCount: 10,
 	});
 	const dispatch = useDispatch<AppDispatch>();
 	const { appointmentStatisticsGraph } = useSelector<
@@ -27,6 +28,7 @@ function RowTwoLine() {
 		data: {},
 		options: {},
 	});
+	console.log(appointmentSheduleData)
 	const startOf: moment.unitOfTime.StartOf[] = ["week", "month", "year"];
 
 	const fetchData = async () => {
@@ -57,8 +59,8 @@ function RowTwoLine() {
 					selectedTab === 0
 						? reducedWeek
 						: selectedTab === 1
-						? reducedMonth
-						: reducedYear
+							? reducedMonth
+							: reducedYear
 				)
 				.toISOString(),
 			endDate: moment()
@@ -67,8 +69,8 @@ function RowTwoLine() {
 					selectedTab === 0
 						? reducedWeek
 						: selectedTab === 1
-						? reducedMonth
-						: reducedYear
+							? reducedMonth
+							: reducedYear
 				)
 				.toISOString(),
 		};
@@ -89,12 +91,12 @@ function RowTwoLine() {
 			appointmentCount.lastWeekAppointmentCount) === 100
 			? 0
 			: Math.round(
-					100 *
-						((appointmentCount.currentWeekAppointmentCount -
-							appointmentCount.lastWeekAppointmentCount) /
-							(appointmentCount.currentWeekAppointmentCount +
-								appointmentCount.lastWeekAppointmentCount / 2))
-			  );
+				100 *
+				((appointmentCount.currentWeekAppointmentCount -
+					appointmentCount.lastWeekAppointmentCount) /
+					(appointmentCount.currentWeekAppointmentCount +
+						appointmentCount.lastWeekAppointmentCount / 2))
+			);
 
 	useEffect(() => {
 		fetchData();
@@ -125,9 +127,8 @@ function RowTwoLine() {
 								{appointmentCount.currentWeekAppointmentCount}
 							</p>
 							<div
-								className={`status ${
-									getDiffPercentage() > 0 ? "greenBg" : "redBg"
-								}`}
+								className={`status ${getDiffPercentage() > 0 ? "greenBg" : "redBg"
+									}`}
 							>
 								{getDiffPercentage() >= 0
 									? `+ ${getDiffPercentage()}%`
@@ -157,11 +158,13 @@ function RowTwoLine() {
 					/>
 				</div>
 			</div>
-			<LineChart
+			{/* <LineChart
 				className="line__chart"
-				data={appointmentSheduleData.data}
+				data={mockChartData}
 				options={appointmentSheduleData.options}
-			/>
+			/> */}
+			<LineChart/>
+			{/* <LineChart data={mockChartData} options={mockChartOptions} /> */}
 		</div>
 	);
 }
