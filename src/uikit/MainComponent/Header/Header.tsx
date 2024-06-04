@@ -42,7 +42,7 @@ function Header() {
 			<div className="flexClassheader header__left">
 				<div>
 					<img
-						src="https://i.ibb.co/N62nHbY/zeal-ai.png"
+						src="https://i.ibb.co/LtXjq0y/zealnex.png"
 						alt="Logo"
 						className="logoSet header__left__logo"
 					/>
